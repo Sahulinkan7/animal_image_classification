@@ -1,18 +1,4 @@
-# Deep_learning_project_template
+# Animal Image Classification
 
-This is a template for starting Deeplearning projects.
+In this project we are using CNN to classify the animals.
 
-- Use this template and make your repository.
-
-- Edit your own README.md file
-
-- After making new repo, do check your requirements of the project and edit requirements files
-
-- change your project name, author name, author email as required.
-
-- then install requirements 
-    > pip install -r requirments.txt
-
-    > pip install -r requirements_dev.txt
-
-- start working on your project
