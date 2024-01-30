@@ -9,8 +9,15 @@ def read_yaml(file_path: Path)-> dict:
         logging.info(f"Reading yaml file from file path : {file_path}")
         with open(file_path,'r') as file:
             content = yaml.safe_load(file)
+            if content is None:
+                raise ValueError("yaml file is empty")
             logging.info(f"yaml file content returned")
             return content
+        
+    except ValueError as e:
+        logging.error(f"yaml file interrupted due to the Error : {CustomException(e,sys)}")
+        raise CustomException(e,sys)
+    
     except Exception as e:
         logging.error(f"Reading yaml file interrupted due to the Error : {CustomException(e,sys)}")
         raise CustomException(e,sys)
