@@ -1,5 +1,9 @@
 from dataclasses import dataclass
 import os,sys
+from src.utils.commonutils import read_yaml
+from src.constants import PARAMS_FILE_PATH
+
+params : dict = read_yaml(PARAMS_FILE_PATH)
 
 @dataclass
 class TrainingPipelineConfig:
@@ -17,4 +21,8 @@ class PrepareBaseModelConfig:
     root_dir = os.path.join(TrainingPipelineConfig.root_dir,"prepare_base_model")
     base_model_filepath = os.path.join(root_dir,"prepared_base_model","basemodel.h5")
     updated_base_model_filepath = os.path.join(root_dir,"updated_base_model","basemodel.h5")
-    
+    params_image_size= params["IMAGE_SIZE"]
+    params_learning_rate = params['LEARNING_RATE']
+    params_include_top = params['INCLUDE_TOP']
+    params_weights = params['WEIGHTS']
+    params_classes=params['CLASSES']
