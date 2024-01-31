@@ -27,7 +27,7 @@ class DataIngestion:
                     url=self.data_ingestion_config.data_source_url,
                     filename=self.data_ingestion_config.downloaded_data
                 )
-                logging.info(f"data downloaded successfully of size {os.path.getsize(self.data_ingestion_config.downloaded_data)}!")
+                logging.info(f"data downloaded successfully of size {os.path.getsize(self.data_ingestion_config.downloaded_data)/(1024*1024)} MB")
             else:
                 logging.info(f"File already exists of size {os.path.getsize(self.data_ingestion_config.downloaded_data)/(1024*1024)} MB")
             return self.data_ingestion_config.downloaded_data
