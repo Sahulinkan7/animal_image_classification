@@ -4,4 +4,5 @@ from src.entity.config_entity import DataIngestionConfig
 diconfig=DataIngestionConfig()
 
 dt=DataIngestion(data_ingestion_config=diconfig)
-dt.initiate_data_ingestion()
+data_ingestion_artifacts = dt.initiate_data_ingestion()
+print(data_ingestion_artifacts)

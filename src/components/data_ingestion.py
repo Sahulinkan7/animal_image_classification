@@ -1,6 +1,7 @@
 from src.logger import logging
 from src.exception import CustomException
 from src.entity.config_entity import DataIngestionConfig
+from src.entity.artifact_entity import DataIngestionArtifact
 import os,sys
 from urllib import request
 from pathlib import Path
@@ -73,12 +74,15 @@ class DataIngestion:
             logging.error(f"Extracting downloaded data Interrupted due to {CustomException(e,sys)}")
             raise CustomException(e,sys)
         
-    def initiate_data_ingestion(self):
+    def initiate_data_ingestion(self)-> DataIngestionArtifact:
         try:
             logging.info(f"{'=='*20} Starting Data Ingestion Component {'=='*20}")
             downloaded_datapath = self.download_data()
             extracted_datapath = self.extract_downloaded_data(downloaded_data_filepath=downloaded_datapath)
-            print(extracted_datapath)
+            data_ingestion_artifacts = DataIngestionArtifact(downloaded_data_filepath=downloaded_datapath,
+                                                            extracted_data_filepath=extracted_datapath)
+            logging.info(f"Data ingestion artifacts : {data_ingestion_artifacts}")
+            return data_ingestion_artifacts
             logging.info(f"{'=='*20} Data Ingestion Component completed {'=='*20}")
         except Exception as e:
             logging.error(f"Inititating Data Ingestion Interrupted due to {CustomException(e,sys)}")
