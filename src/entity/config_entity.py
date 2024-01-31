@@ -7,7 +7,7 @@ class TrainingPipelineConfig:
 
 @dataclass
 class DataIngestionConfig:
-    root_dir = os.path.join(TrainingPipelineConfig.root_dir,"DataIngestion")
+    root_dir = os.path.join(TrainingPipelineConfig.root_dir,"data_ingestion")
     data_source_url = f"https://download.microsoft.com/download/3/E/1/3E1C3F21-ECDB-4869-8368-6DEBA77B919F/kagglecatsanddogs_5340.zip"
     downloaded_data = os.path.join(root_dir,"downloaded_data","data.zip")
     extracted_data=os.path.join(root_dir,"extracted_data")

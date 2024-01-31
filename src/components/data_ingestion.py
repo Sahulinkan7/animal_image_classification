@@ -33,19 +33,41 @@ class DataIngestion:
         except Exception as e:
             logging.error(f"Data downloading from source interrupted due to {CustomException(e,sys)}")
             raise CustomException(e,sys)
-        
+
+    def _preprocess(self,zf:ZipFile,filename:str,working_dir: str):
+        try:
+            logging.info(f"Processing file {filename}")
+            target_file = os.path.join(working_dir,filename)
+
+            if not os.path.exists(target_file):
+                zf.extract(filename,working_dir)
+
+            if os.path.getsize(target_file) == 0:
+                os.remove(target_file)
+
+        except Exception as e:
+            logging.error(f"Processing file interrupted due to {CustomException(e,sys)}")
+            raise CustomException(e,sys) 
+
     def extract_downloaded_data(self,downloaded_data_filepath):
         try:
             logging.info(f"Starting Extraction of zipped downloaded data from {downloaded_data_filepath}")
             downloaded_data = self.data_ingestion_config.downloaded_data
-            os.makedirs(self.data_ingestion_config.extracted_data)
+            os.makedirs(self.data_ingestion_config.extracted_data,exist_ok=True)
             
             unzip_dir = self.data_ingestion_config.extracted_data
-            with ZipFile(downloaded_data,'r') as ziprefernce:
-                ziprefernce.extractall(unzip_dir)
+
+            with ZipFile(downloaded_data,'r') as zipreference:
+                list_of_files = zipreference.namelist()
+                updated_list_of_files = [file for file in list_of_files if file.endswith(".jpg") and ("Cat" in file or "Dog" in file)]
+                
+                for file in updated_list_of_files:
+                    self._preprocess(zipreference,file,self.data_ingestion_config.extracted_data)
+                
                 logging.info(f"Downloaded data got extracted to the filepath {unzip_dir}")
                 
             return unzip_dir
+
         except Exception as e:
             logging.error(f"Extracting downloaded data Interrupted due to {CustomException(e,sys)}")
             raise CustomException(e,sys)
