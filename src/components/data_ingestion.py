@@ -36,7 +36,7 @@ class DataIngestion:
 
     def _preprocess(self,zf:ZipFile,filename:str,working_dir: str):
         try:
-            logging.info(f"Processing file {filename}")
+
             target_file = os.path.join(working_dir,filename)
 
             if not os.path.exists(target_file):
