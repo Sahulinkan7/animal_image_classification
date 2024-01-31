@@ -17,7 +17,7 @@ class DataIngestion:
     def download_data(self):
         try:
             logging.info(f"Starting data downloading from source")
-            os.makedirs(self.data_ingestion_config.downloaded_data,exist_ok=True)
+            os.makedirs(os.path.dirname(self.data_ingestion_config.downloaded_data),exist_ok=True)
             if not os.path.exists(self.data_ingestion_config.downloaded_data):
                 request.urlretrieve(
                     url=self.data_ingestion_config.data_source_url,
