@@ -38,10 +38,6 @@ class DataIngestion:
 
     def _preprocess(self,zf:ZipFile,filename:str,working_dir: str):
         try:
-<<<<<<< HEAD
-=======
-
->>>>>>> ba08cac0e5a6dc7fd02cf582fbb8389f70898948
             target_file = os.path.join(working_dir,filename)
 
             if not os.path.exists(target_file):
