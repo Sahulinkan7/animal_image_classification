@@ -9,6 +9,7 @@ from zipfile import ZipFile
 class DataIngestion:
     def __init__(self,data_ingestion_config : DataIngestionConfig):
         try:
+            
             self.data_ingestion_config = data_ingestion_config
             os.makedirs(self.data_ingestion_config.root_dir,exist_ok=True)
             
@@ -70,5 +71,16 @@ class DataIngestion:
 
         except Exception as e:
             logging.error(f"Extracting downloaded data Interrupted due to {CustomException(e,sys)}")
+            raise CustomException(e,sys)
+        
+    def initiate_data_ingestion(self):
+        try:
+            logging.info(f"{'=='*20} Starting Data Ingestion Component {'=='*20}")
+            downloaded_datapath = self.download_data()
+            extracted_datapath = self.extract_downloaded_data(downloaded_data_filepath=downloaded_datapath)
+            print(extracted_datapath)
+            logging.info(f"{'=='*20} Data Ingestion Component completed {'=='*20}")
+        except Exception as e:
+            logging.error(f"Inititating Data Ingestion Interrupted due to {CustomException(e,sys)}")
             raise CustomException(e,sys)
         
