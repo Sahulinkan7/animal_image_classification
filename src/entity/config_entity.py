@@ -12,3 +12,9 @@ class DataIngestionConfig:
     downloaded_data = os.path.join(root_dir,"downloaded_data","data.zip")
     extracted_data=os.path.join(root_dir,"extracted_data")
     
+@dataclass
+class PrepareBaseModelConfig:
+    root_dir = os.path.join(TrainingPipelineConfig.root_dir,"prepare_base_model")
+    base_model_filepath = os.path.join(root_dir,"prepared_base_model","basemodel.h5")
+    updated_base_model_filepath = os.path.join(root_dir,"updated_base_model","basemodel.h5")
+    
