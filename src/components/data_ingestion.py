@@ -38,7 +38,6 @@ class DataIngestion:
 
     def _preprocess(self,zf:ZipFile,filename:str,working_dir: str):
         try:
-            logging.info(f"Processing file {filename}")
             target_file = os.path.join(working_dir,filename)
 
             if not os.path.exists(target_file):
@@ -82,8 +81,9 @@ class DataIngestion:
             data_ingestion_artifacts = DataIngestionArtifact(downloaded_data_filepath=downloaded_datapath,
                                                             extracted_data_filepath=extracted_datapath)
             logging.info(f"Data ingestion artifacts : {data_ingestion_artifacts}")
-            return data_ingestion_artifacts
             logging.info(f"{'=='*20} Data Ingestion Component completed {'=='*20}")
+            return data_ingestion_artifacts
+        
         except Exception as e:
             logging.error(f"Inititating Data Ingestion Interrupted due to {CustomException(e,sys)}")
             raise CustomException(e,sys)
