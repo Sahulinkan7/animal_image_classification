@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from pathlib imort Path
+from pathlib import Path
 
 @dataclass
 class DataIngestionArtifact:
