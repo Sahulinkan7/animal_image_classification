@@ -26,3 +26,8 @@ class PrepareBaseModelConfig:
     params_include_top = params['INCLUDE_TOP']
     params_weights = params['WEIGHTS']
     params_classes=params['CLASSES']
+    
+
+@dataclass
+class ModelTrainerConfig:
+    root_dir = os.path.join(TrainingPipelineConfig.root_dir,"Trained_model")
